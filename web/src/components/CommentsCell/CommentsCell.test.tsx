@@ -2,7 +2,9 @@ import { render, screen, waitFor } from '@redwoodjs/testing'
 
 import { standard } from 'src/components/CommentsCell/CommentsCell.mock'
 
-import Article from './Article'
+import Article from '../Article/Article'
+
+import { Empty } from '.'
 
 const ARTICLE = {
   id: 1,
@@ -46,5 +48,10 @@ describe('Article', () => {
     await waitFor(() =>
       expect(screen.queryByText(comment.body)).not.toBeInTheDocument()
     )
+  })
+
+  it('renders Empty successfully', async () => {
+    render(<Empty />)
+    expect(screen.getByText('No comments yet')).toBeInTheDocument()
   })
 })
